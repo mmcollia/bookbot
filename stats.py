@@ -5,42 +5,30 @@ def count_words(book_text):
     for word in word_list:
         counter += 1
 
-    return f"{counter} words found in the document"
+    return f"Found {counter} total words"
 
-def text_to_char(book_text):
-    letter_dict = {
-            "a": 0,
-            "b": 0,
-            "c": 0,
-            "d": 0,
-            "e": 0,
-            "f": 0,
-            "g": 0,
-            "h": 0,
-            "i": 0,
-            "j": 0,
-            "k": 0,
-            "l": 0,
-            "m": 0, 
-            "n": 0,
-            "o": 0,
-            "p": 0,
-            "q": 0,
-            "r": 0,
-            "s": 0,
-            "t": 0,
-            "u": 0,
-            "v": 0,
-            "w": 0,
-            "x": 0,
-            "y": 0,
-            "z": 0
-            }
-    book_text = book_text.lower()
-    for c in book_text:
-        if c in letter_dict:
-            actual_count = letter_dict[c]
-            actual_count += 1
-            letter_dict[c] = actual_count
+def text_to_char(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if c.isalpha():
+            if lowered in chars:
+                chars[lowered] += 1
+            else:
+                chars[lowered] = 1
+    return chars
 
-    return letter_dict
+def report(extracted_dict):
+    list_dict = [] 
+    for key in extracted_dict:
+        new_dict = {}
+        new_dict["char"] = key
+        new_dict["num"] = extracted_dict[key]
+        list_dict.append(new_dict)
+
+    list_dict.sort(key=lambda element: element["num"], reverse=True)
+    return list_dict
+
+
+                
+
